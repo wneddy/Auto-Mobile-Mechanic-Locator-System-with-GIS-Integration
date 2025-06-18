@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Owner Profile</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your external CSS file -->
+    <script src="/src/js/main.js"></script>
+    <script src="/src/js/reporting.js"></script>
+</head>
+<body class="profile_vehicle_owner">
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">Auto-Mobile Mechanic Locator System</div>
+            <ul>
+                <li><a href="find-service.html">Find Services</a></li>
+                <li><a href="marketplace.html">Market Place</a></li>
+                <li><a href="find-mechanic.html">Find Mechanic</a></li>
+                <li class="dropdown">
+                    <button>About</button>
+                    <div class="dropdown-content">
+                            <a href="about.html">About</a>
+                            <a href="faq.html">FAQ</a>
+                            <a href="contact.html">Contact</a>
+                    </div>
+                </li>   
+            </ul>
+            <li class="dropdown">
+                <img src="default-profile.png" alt="Profile" class="profile-icon" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown-content" id="profileOptions">
+                    <a href="create-profile.html">Create Profile</a>
+                    <a href="profile-vehicle-owner.html">View Profile</a>
+                    <a href="update-profile.html">Update Profile</a>
+                    <a href="#" id="delete-profile">Delete Profile</a>
+                    <a href="#" id="logout">Logout</a>
+                </div>
+            </li>
+        </nav>
+    </header>
+    <div class="container">
+        <form id="profile-form">
+            <div class="profile-header">
+                <div class="profile-wrapper">
+                    <div class="profile-picture">
+                        <img src="default-profile.png" alt="Profile Picture" id="profile-picture-preview">
+                        <input type="file" id="profile-picture" accept="image/*" style="margin-top: 10px;">
+                    </div>
+                    <div class="form-section">
+                        <h2 class="h2-login-section">Vehicle Owner Personal Information</h2>
+                        <input type="hidden" id="user-id" name="user_id" value="USER_ID_HERE"> <!-- Hidden user_id field -->
+
+                        <label for="full-name">Full Name (*):</label>
+                        <input type="text" id="full-name" required>
+
+                        <label for="email">Email (*):</label>
+                        <input type="email" id="email" required>
+
+                        <label for="phone">Phone Number (*):</label>
+                        <input type="tel" id="phone" required>
+
+                        <label for="county">County (*):</label>
+                        <select id="county" required>
+                            <option value="" disabled selected>Select your county</option>
+                            <!-- Counties will be populated here -->
+                        </select>
+
+                        <label for="sub-county">Sub-County (Please select County first!):</label>
+                        <select id="sub-county" required>
+                            <option value="" disabled selected>Select your sub-county</option>
+                            <!-- Sub-counties will be populated based on selected county -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-vehicle-container">
+                <div class="service-history">
+                    <h2 class="h2-login-section">Service & Maintenance History</h2>
+                    <label for="last-service-date">Last Service Date (*):</label>
+                    <input type="date" id="last-service-date" required>
+
+                    <label for="service-frequency">Service Frequency (*):</label>
+                    <input type="text" id="service-frequency" placeholder="E.g., Every 6 months, 10,000 km" required>
+
+                    <label for="common-issues">Common Vehicle Issues (*):</label>
+                    <textarea id="common-issues" placeholder="Describe frequent problems reported" rows="4"></textarea>
+
+                    <label for="next-scheduled-service">Next Scheduled Service (*):</label>
+                    <input type="date" id="next-scheduled-service" required>
+                </div>
+
+                <div class="vehicle-details">
+                    <h2 class="h2-login-section">Vehicle Details</h2>
+                    <label for="license-plate">License Plate Number (*):</label>
+                    <input type="text" id="license-plate" required>
+
+                    <label for="make-model">Vehicle Make & Model (*):</label>
+                    <input type="text" id="make-model" placeholder="E.g., Toyota Corolla 2018" required>
+
+                    <label for="vehicle-type">Vehicle Type:</label>
+                    <select id="vehicle-type" required>
+                        <option value="" disabled selected>Select vehicle type (*)</option>
+                        <option value="Sedan">Sedan</option>
+                        <option value="SUV">SUV</option>
+                        <option value="Truck">Truck</option>
+                        <option value="Hatchback">Hatchback</option>
+                        <option value="Coupe">Coupe</option>
+                        <option value="Convertible">Convertible</option>
+                        <option value="Van">Van</option>
+                        <option value="Motorcycle">Motorcycle</option>
+                    </select>
+
+                    <label for="number-of-vehicles">Number of Vehicles Owned (*):</label>
+                    <input type="number" id="number-of-vehicles" min="1" value="1" required>
+
+                    <label for="year-manufacture">Year of Manufacture (*):</label>
+                    <input type="number" id="year-manufacture" min="1900" max="2023" required>
+
+                    <label for="insurance-status">Insurance Status (*):</label>
+                    <select id="insurance-status" required>
+                        <option value="" disabled selected>Select insurance status</option>
+                        <option value="Active">Active</option>
+                        <option value="Expired">Expired</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="change-password">
+                <h2 class="h2-login-section">Change Password</h2>
+                <label for="current-password">Current Password (*):</label>
+                <input type="password" id="current-password" required>
+
+                <label for="new-password">New Password (*):</label>
+                <input type="password" id="new-password" required>
+
+                <label for="confirm-password">Confirm New Password (*):</label>
+                <input type="password" id="confirm-password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Profile</button>
+            <button type="button" class="btn btn-danger" id="delete-profile">Delete Profile</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('token'); // Retrieve the token from local storage
+            const userId = localStorage.getItem('user_id'); // Retrieve the user ID from local storage
+    
+            // Function to fetch the vehicle owner profile
+            async function fetchVehicleOwnerProfile(userId) {
+                try {
+                    const profileResponse = await fetch(`http://localhost:5501/api/auth/getVehicleOwnerProfile/${userId}`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}` // Include the token in the request headers
+                        }
+                    });
+    
+                    if (!profileResponse.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+    
+                    const profileData = await profileResponse.json();
+    
+                    // Populate the form fields with the profile data
+                    document.getElementById('full-name').value = profileData.fullName || '';
+                    document.getElementById('email').value = profileData.email || '';
+                    document.getElementById('phone').value = profileData.phone || '';
+                    document.getElementById('county').value = profileData.county || '';
+                    document.getElementById('sub-county').value = profileData.subCounty || '';
+                    document.getElementById('last-service-date').value = profileData.lastServiceDate || '';
+                    document.getElementById('service-frequency').value = profileData.serviceFrequency || '';
+                    document.getElementById('common-issues').value = profileData.commonIssues || '';
+                    document.getElementById('next-scheduled-service').value = profileData.nextScheduledService || '';
+                    document.getElementById('license-plate').value = profileData.licensePlate || '';
+                    document.getElementById('make-model').value = profileData.makeModel || '';
+                    document.getElementById('vehicle-type').value = profileData.vehicleType || '';
+                    document.getElementById('number-of-vehicles').value = profileData.numberOfVehicles || 1;
+                    document.getElementById('year-manufacture').value = profileData.yearManufacture || '';
+                    document.getElementById('insurance-status').value = profileData.insuranceStatus || '';
+    
+                } catch (error) {
+                    console.error('Error fetching profile:', error);
+                    alert('Failed to load profile data. Please try again later.');
+                }
+            }
+    
+            // Fetch the vehicle owner profile
+            if (userId) {
+                await fetchVehicleOwnerProfile(userId);
+            } else {
+                alert('User  ID not found. Please log in again.');
+            }
+    
+            // Event listener for the form submission
+            document.getElementById('profile-form').addEventListener('submit', async (event) => {
+                event.preventDefault(); // Prevent the default form submission
+    
+                const formData = {
+                    user_id: document.getElementById('user-id').value,
+                    fullName: document.getElementById('full-name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    county: document.getElementById('county').value,
+                    subCounty: document.getElementById('sub-county').value,
+                    lastServiceDate: document.getElementById('last-service-date').value,
+                    serviceFrequency: document.getElementById('service-frequency').value,
+                    commonIssues: document.getElementById('common-issues').value,
+                    nextScheduledService: document.getElementById('next-scheduled-service').value,
+                    licensePlate: document.getElementById('license-plate').value,
+                    makeModel: document.getElementById('make-model').value,
+                    vehicleType: document.getElementById('vehicle-type').value,
+                    numberOfVehicles: document.getElementById('number-of-vehicles').value,
+                    yearManufacture: document.getElementById('year-manufacture').value,
+                    insuranceStatus: document.getElementById('insurance-status').value,
+                };
+    
+                try {
+                    const updateResponse = await fetch(`http://localhost:5501/api/auth/updateVehicleOwnerProfile/${userId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}` // Include the token in the request headers
+                        },
+                        body: JSON.stringify(formData)
+                    });
+    
+                    if (!updateResponse.ok) {
+                        throw new Error('Failed to update profile');
+                    }
+    
+                    alert('Profile updated successfully!');
+                    window.location.href = 'dash-vehicle-owner.html'; // Redirect to the profile display page
+    
+                } catch (error) {
+                    console.error('Error updating profile:', error);
+                    alert('Failed to update profile. Please try again later.');
+                }
+            });
+    
+            // Event listener for the delete profile button
+            document.getElementById('delete-profile').addEventListener('click', async () => {
+                if (confirm('Are you sure you want to delete your profile? This action cannot be undone.')) {
+                    try {
+                        const deleteResponse = await fetch(`http://localhost:5501/api/auth/deleteVehicleOwnerProfile/${userId}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Authorization': `Bearer ${token}` // Include the token in the request headers
+                            }
+                        });
+    
+                        if (!deleteResponse.ok) {
+                            throw new Error('Failed to delete profile');
+                        }
+    
+                        alert('Profile deleted successfully!');
+                        localStorage.removeItem('token'); // Clear the token from local storage
+                        localStorage.removeItem('user_id'); // Clear the user ID from local storage
+                        window.location.href = 'login.html'; // Redirect to the login page
+    
+                    } catch (error) {
+                        console.error('Error deleting profile:', error);
+                        alert('Failed to delete profile. Please try again later.');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+   
+       

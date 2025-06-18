@@ -1,0 +1,7 @@
+const path = require('path');
+
+module.exports = {
+    'migrations-path': path.resolve('backend/migrations'),
+    'models-path': path.resolve('src/models'), // Adjust if your models are in a different location
+    'seeders-path': path.resolve('backend/seeders'), // Adjust if you have seeders
+};

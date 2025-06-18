@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Registration</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">Auto-Mobile Mechanic Locator System</div>
+            <ul>
+                <li><a href="find-service.html">Find Services</a></li>
+                <li><a href="marketplace.html">Market Place</a></li>
+                <li><a href="find-mechanic.html">Find Mechanic</a></li>
+                <li class="dropdown">
+                    <button>About</button>
+                    <div class="dropdown-content">
+                            <a href="about.html">About</a>
+                            <a href="faq.html">FAQ</a>
+                            <a href="contact.html">Contact</a>
+                    </div>
+                </li>   
+            </ul>
+            <li class="dropdown">
+                <img src="default-profile.png" alt="Profile" class="profile-icon" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown-content" id="profileOptions">
+                    <a href="create-profile.html">Create Profile</a>
+                    <a href="profile-vehicle-owner.html">View Profile</a>
+                    <a href="update-profile.html">Update Profile</a>
+                    <a href="#" id="delete-profile">Delete Profile</a>
+                    <a href="#" id="logout">Logout</a>
+                </div>
+            </li>
+        </nav>
+    </header>
+
+    <section class="registration-section">
+        <h2 class="h2-login-section">Sign Up</h2>
+        <p class="p-registration-section">Welcome! Please sign up/register to get an account.</p>
+
+        <form id="registration-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+    
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" required>
+    
+            <label for="password">Password:</label>
+            <div class="password-container">
+                <input type="password" id="password" required>
+                <i id="togglePassword" class="fa fa-eye" style="cursor: pointer;"></i>
+            </div>
+    
+            <label for="confirm-password">Confirm Password:</label>
+            <div class="password-container">
+                <input type="password" id="confirm-password" required>
+                <i id="toggleConfirmPassword" class="fa fa-eye" style="cursor: pointer;"></i>
+            </div>
+    
+            <label for="user_type">Role:</label>
+            <select id="user_type" required>
+                <option value="" disabled selected>Choose Role</option>
+                <option value="vehicle-owner">Vehicle Owner</option>
+                <option value="vendor">Vendor</option>
+                <option value="mechanic">Mechanic</option>
+                <option value="admin">Admin</option>
+            </select>
+    
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+    
+        <p class="p-registration-section">Already have an account? <a href="login.html">Sign In</a></p>
+    </section>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("registration-form");
+    
+            form.addEventListener("submit", async function (event) {
+                event.preventDefault(); // Prevent default form submission
+    
+                // Get form values
+                const email = document.getElementById("email").value.trim();
+                const phone = document.getElementById("phone").value.trim();
+                const password = document.getElementById("password").value;
+                const confirmPassword = document.getElementById("confirm-password").value;
+                const user_type = document.getElementById("user_type").value;
+    
+                // Validate inputs
+                if (!email || !phone || !password || !confirmPassword || !user_type) {
+                    alert("All fields are required.");
+                    return;
+                }
+    
+                if (password !== confirmPassword) {
+                    alert("Passwords do not match.");
+                    return;
+                }
+    
+                // Prepare data for submission
+                const formData = {
+                    email,
+                    phone,
+                    password,
+                    confirmPassword, // Include confirmPassword for backend validation
+                    user_type
+                };
+    
+                try {
+                    const response = await fetch("http://localhost:5501/api/auth/register", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(formData)
+                    });
+    
+                    const result = await response.json();
+    
+                    if (response.ok) {
+                        alert(result.message);
+                        form.reset(); // Clear the form
+                        window.location.href = "login.html"; // Redirect to login page after successful registration
+                    } else {
+                        alert(result.message); // Show error message
+                    }
+                } catch (error) {
+                    console.error("Registration error:", error);
+                    alert("An error occurred. Please try again.");
+                }
+            });
+    
+            // Toggle password visibility
+            document.getElementById("togglePassword").addEventListener("click", function () {
+                const passwordField = document.getElementById("password");
+                passwordField.type = passwordField.type === "password" ? "text" : "password";
+            });
+    
+            document.getElementById("toggleConfirmPassword").addEventListener("click", function () {
+                const confirmPasswordField = document.getElementById("confirm-password");
+                confirmPasswordField.type = confirmPasswordField.type === "password" ? "text" : "password";
+            });
+        });
+    </script>
+    
+</body>
+</html>

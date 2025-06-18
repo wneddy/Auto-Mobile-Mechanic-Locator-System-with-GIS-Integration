@@ -1,0 +1,83 @@
+body {
+    background-color: #f8f9fa;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .card {
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
+  
+  .card-header {
+    background-color: #343a40;
+    color: white;
+    font-weight: 600;
+  }
+  
+  .form-group label {
+    font-weight: 500;
+    color: #495057;
+  }
+  
+  .custom-file-label {
+    overflow: hidden;
+  }
+  
+  #imagePreview {
+    max-width: 100%;
+    margin-top: 10px;
+  }
+  
+  #imagePreview img {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .btn-primary {
+    background-color: #343a40;
+    border-color: #343a40;
+  }
+  
+  .btn-primary:hover {
+    background-color: #23272b;
+    border-color: #23272b;
+  }
+  
+  .btn-outline-light:hover {
+    color: #343a40;
+    background-color: #f8f9fa;
+  }
+  
+  .alert-info {
+    background-color: #e2f0fb;
+    border-color: #c9e3f6;
+    color: #0c5384;
+  }
+  
+  .text-danger {
+    color: #dc3545;
+  }
+  
+  .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #343a40;
+    border-color: #343a40;
+  }
+  
+  .custom-checkbox .custom-control-label {
+    padding-top: 2px;
+  }
+  
+  @media (max-width: 768px) {
+    .card {
+      margin-bottom: 20px;
+    }
+  
+    .container {
+      padding: 0 15px;
+    }
+  }
+  
+  

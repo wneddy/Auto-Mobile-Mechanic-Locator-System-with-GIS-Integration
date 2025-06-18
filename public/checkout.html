@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Checkout</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">Auto-Mobile Mechanic Locator System</div>
+            <ul>
+                <li><a href="find-service.html">Find Services</a></li>
+                <li><a href="marketplace.html">Market Place</a></li>
+                <li><a href="find-mechanic.html">Find Mechanic</a></li>
+                <li class="dropdown">
+                    <button>About</button>
+                    <div class="dropdown-content">
+                            <a href="about.html">About</a>
+                            <a href="faq.html">FAQ</a>
+                            <a href="contact.html">Contact</a>
+                    </div>
+                </li>   
+            </ul>
+            <li class="dropdown">
+                <img src="default-profile.png" alt="Profile" class="profile-icon" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown-content" id="profileOptions">
+                    <a href="create-profile.html">Create Profile</a>
+                    <a href="profile-vehicle-owner.html">View Profile</a>
+                    <a href="update-profile.html">Update Profile</a>
+                    <a href="#" id="delete-profile">Delete Profile</a>
+                    <a href="#" id="logout">Logout</a>
+                </div>
+            </li>
+        </nav>
+    </header>
+
+    <section class="checkout-section">
+        <h3 class="h3-checkout-section">Checkout</h3>
+        <div class="order-summary">
+            <h4 class="h4-checkout-section">Order Summary</h4>
+            <div id="cart-items">
+                <!-- Dynamically loaded cart items will go here -->
+                <div class="loading">Loading cart items...</div>
+            </div>
+            <div class="cart-total">
+                <p class="p-checkout-section">Total: KES <span id="total-amount">0.00</span></p>
+            </div>
+        </div>
+
+        <div class="payment-info">
+            <h3 class="h3-checkout-section">Payment Information</h3>
+            <form id="checkout-form">
+                <label for="payment-method">Select Payment Method:</label>
+                <select id="payment-method" required>
+                    <option value="">Choose a payment method</option>
+                    <option value="credit-card">Credit/Debit Card</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="mpesa">M-Pesa</option>
+                    <option value="google-pay">Google Pay</option>
+                    <option value="apple-pay">Apple Pay</option>
+                </select>
+
+                <div id="credit-card-info" class="payment-details" style="display: none;">
+                    <label for="card-number">Card Number:</label>
+                    <input type="text" id="card-number" required>
+                    
+                    <label for="expiry">Expiry Date (MM/YY):</label>
+                    <input type="text" id="expiry" required>
+                    
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" required>
+                </div>
+
+                <div id="paypal-info" class="payment-details" style="display: none;">
+                    <p class="p-checkout-section">You will be redirected to PayPal to complete your payment.</p>
+                </div>
+
+                <div id="mpesa-info" class="payment-details" style="display: none;">
+                    <label for="mpesa-number">M-Pesa Phone Number:</label>
+                    <input type="text" id="mpesa-number" placeholder="Enter your phone number (07XXXXXXXX)" required>
+                    <p class="p-checkout-section">You will receive a payment request on your M-Pesa app. Please enter your PIN to complete the payment.</p>
+                </div>
+
+                <div id="google-pay-info" class="payment-details" style="display: none;">
+                    <p class="p-checkout-section">You will be redirected to Google Pay to complete your payment.</p>
+                </div>
+
+                <div id="apple-pay-info" class="payment-details" style="display: none;">
+                    <p class="p-checkout-section">You will be redirected to Apple Pay to complete your payment.</p>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Complete Purchase</button>
+            </form>
+        </div>
+    </section>
+    <section class="mechanic-section">
+        <h2 class="h2-mechanic-section">Connect with Expert Mechanics</h2>
+        <div class="image-container-mechanic-section">
+            <div class="image-slider-mechanic-section">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/66600c81-50d2-4ead-e35f-66c3be444b00/public" alt="Mechanic using tablet">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/c480e728-b1c4-4311-b662-a896537eec00/public" alt="Car diagnostics on phone">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/a02d849e-bb5d-47c7-7863-a811f186a800/publicContain" alt="Mechanic working under car">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/c4f3f115-00c6-44b8-7d9f-732f66b4b100/public" alt="Follow us for updates">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/dbc8d1f0-ded8-46e7-02bd-cdd648f5ad00/public" alt="Car repair expert">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/b9438390-0e28-480a-1ec3-d5bb10bf0800/public" alt="Engine repair">
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>Auto-Mobile Mechanic Locator System</h2>
+                <p>
+                    We are building a web-based platform that connects vehicle owners with nearby mechanics
+                    based on location, availability, and vehicle type. Our system ensures quick and reliable
+                    service by providing real-time tracking, booking options, and a marketplace for spare parts.
+                </p>
+                <div class="contact-info">
+                    <p>📞 +1 23 456 789</p>
+                    <p>✉️ <a href="/cdn-cgi/l/email-protection#f794989983969483b796828398da9a98959e9b92d994989a"><span class="__cf_email__" data-cfemail="dcbfb3b2a8bdbfa89cbda9a8b3f1b1b3beb5b0b9f2bfb3b1">[email&#160;protected]</span></a></p>
+                    <p>📍 123 Mechanic Ave, City, State, USA</p>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="find-mechanic.html">Find a Mechanic</a></li>
+                    <li><a href="marketplace.html">Spare Parts Marketplace</a></li>
+                    <li><a href="#">Booking</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-resources">
+                <h3>Additional Resources</h3>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="#">User Account</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Email</a>
+                    <a href="#">YouTube</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 AUTO-MOBILE MECHANIC LOCATOR SYSTEM. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="javascripts/checkout.js"></script>
+</body>
+</html>
+

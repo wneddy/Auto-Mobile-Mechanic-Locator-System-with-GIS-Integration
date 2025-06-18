@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Owner Profile</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your external CSS file -->
+</head>
+<body class="profile_vehicle_owner">
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">Auto-Mobile Mechanic Locator System</div>
+            <ul>
+                <li><a href="find-service.html">Find Services</a></li>
+                <li><a href="marketplace.html">Market Place</a></li>
+                <li><a href="find-mechanic.html">Find Mechanic</a></li>
+                <li class="dropdown">
+                    <button>About</button>
+                    <div class="dropdown-content">
+                        <a href="about.html">About</a>
+                        <a href="faq.html">FAQ</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </li>   
+            </ul>
+            <li class="dropdown">
+                <img src="default-profile.png" alt="Profile" class="profile-icon" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown-content" id="profileOptions">
+                    <a href="create-profile.html">Create Profile</a>
+                    <a href="profile-vehicle-owner.html">View Profile</a>
+                    <a href="update-profile.html">Update Profile</a>
+                    <a href="#" id="delete-profile">Delete Profile</a>
+                    <a href="#" id="logout">Logout</a>
+                </div>
+            </li>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="profile-header">
+            <div class="profile-wrapper">
+                <div class="profile-picture">
+                    <img src="default-profile.png" alt="Profile Picture" id="profile-picture-preview">
+                </div>
+                <div class="info-section">
+                    <h2 class="h2-login-section">Vehicle Owner Personal Information</h2>
+                    <p><strong>Full Name:</strong> <span id="full-name">John Doe</span></p>
+                    <p><strong>Email:</strong> <span id="email">john.doe@example.com</span></p>
+                    <p><strong>Phone Number:</strong> <span id="phone">123-456-7890</span></p>
+                    <p><strong>County:</strong> <span id="county">Nairobi</span></p>
+                    <p><strong>Sub-County:</strong> <span id="sub-county">Westlands</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-vehicle-container">
+            <div class="service-history">
+                <h2 class="h2-login-section">Service & Maintenance History</h2>
+                <p><strong>Last Service Date:</strong> <span id="last-service-date">01/01/2023</span></p>
+                <p><strong>Service Frequency:</strong> <span id="service-frequency">Every 6 months</span></p>
+                <p><strong>Common Vehicle Issues:</strong> <span id="common-issues">Engine overheating</span></p>
+                <p><strong>Next Scheduled Service:</strong> <span id="next-scheduled-service">07/01/2023</span></p>
+            </div>
+
+            <div class="vehicle-details">
+                <h2 class="h2-login-section">Vehicle Details</h2>
+                <p><strong>License Plate Number:</strong> <span id="license-plate">ABC-1234</span></p>
+                <p><strong>Vehicle Make & Model:</strong> <span id="make-model">Toyota Corolla 2018</span></p>
+                <p><strong>Vehicle Type:</strong> <span id="vehicle-type">Sedan</span></p>
+                <p><strong>Number of Vehicles Owned:</strong> <span id="number-of-vehicles">1</span></p>
+                <p><strong>Year of Manufacture:</strong> <span id="year-manufacture">2018</span></p>
+                <p><strong>Insurance Status:</strong> <span id="insurance-status">Active</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userId = localStorage.getItem('user_id'); // Get the user ID from localStorage
+            const token = localStorage.getItem('token'); // Get the token from localStorage
+    
+            if (!userId || !token) {
+                alert('You must be logged in to view your profile.');
+                return;
+            }
+    
+            // Fetch the profile data from the backend
+            fetch(`http://localhost:5501/api/auth/profile/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch profile data');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Populate the profile information in the UI
+                document.getElementById('full-name').textContent = data.full_name;
+                document.getElementById('email').textContent = data.email; // Assuming email is part of the response
+                document.getElementById('phone').textContent = data.phone; // Assuming phone is part of the response
+                document.getElementById('county').textContent = data.county;
+                document.getElementById('sub-county').textContent = data.sub_county;
+                document.getElementById('last-service-date').textContent = data.last_service_date ? new Date(data.last_service_date).toLocaleDateString() : 'N/A';
+                document.getElementById('service-frequency').textContent = data.service_frequency || 'N/A';
+                document.getElementById('common-issues').textContent = data.common_issues || 'N/A';
+                document.getElementById('next-scheduled-service').textContent = data.next_scheduled_service ? new Date(data.next_scheduled_service).toLocaleDateString() : 'N/A';
+                document.getElementById('license-plate').textContent = data.license_plate;
+                document.getElementById('make-model').textContent = data.make_model;
+                document.getElementById('vehicle-type').textContent = data.vehicle_type;
+                document.getElementById('number-of-vehicles').textContent = data.number_of_vehicles;
+                document.getElementById('year-manufacture').textContent = data.year_manufacture;
+                document.getElementById('insurance-status').textContent = data.insurance_status;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert(error.message);
+            });
+        });
+    </script>
+
+</body>
+</html>

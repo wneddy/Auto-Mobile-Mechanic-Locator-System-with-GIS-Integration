@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mechanic Profile Creator</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your external CSS file -->
+</head>
+<body class="profile_vehicle_owner">
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">Auto-Mobile Mechanic Locator System</div>
+            <ul>
+                <li><a href="find-service.html">Find Services</a></li>
+                <li><a href="marketplace.html">Market Place</a></li>
+                <li class="dropdown">
+                    <button>About</button>
+                    <div class="dropdown-content">
+                        <a href="about.html">About</a>
+                        <a href="faq.html">FAQ</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </li>
+                <li><a href="find-mechanic.html">Find Mechanic</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <form id="mechanic-profile-form">
+            <div class="profile-header">
+                <div class="profile-wrapper">
+                    <div class="profile-picture">
+                        <img src="default-profile.png" alt="Profile Picture" id="profile-picture-preview"> <!-- Placeholder image -->
+                        <input type="file" id="profile-picture" accept="image/*" style="margin-top: 10px;">
+                    </div>
+                    <div class="form-section">
+                        <h2 class="h2-login-section">Mechanic Personal Information</h2>
+                        <input type="hidden" id="user-id" name="user_id" value="USER_ID_HERE"> <!-- Hidden user_id field -->
+                        <input type="hidden" id="latitude" name="latitude" required> <!-- Hidden latitude field -->
+                        <input type="hidden" id="longitude" name="longitude" required>
+
+                        <label for="full-name">Full Name (*):</label>
+                        <input type="text" id="full-name" required>
+
+                        <label for="gender">Gender (*):</label>
+                        <select id="gender" required>
+                            <option value="" disabled selected>Select your gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+
+                        <label for="national-id-passport">National ID/Passport (*):</label>
+                        <input type="text" id="national-id-passport" required>
+                    </div>
+                </div> <!-- End of profile-wrapper -->
+            </div>
+
+            <!-- New section for specialization and additional personal information -->
+            <div class="specialization-section">
+                <h2 class="h2-login-section">Mechanic Specialization</h2>
+
+                <label for="specialization">Specialization (*):</label>
+                <select id="specialization" required>
+                    <option value="" disabled selected>Select specialization</option>
+                    <option value="Engine Repair">Engine Repair</option>
+                    <option value="Brake System">Brake System</option>
+                    <option value="Electrical Wiring">Electrical Wiring</option>
+                    <option value="Transmission">Transmission</option>
+                    <option value="Suspension">Suspension</option>
+                    <option value="Body Work">Body Work</option>
+                </select>
+
+                <label for="skills-services">Skills/Services Offered (*):</label>
+                <textarea id="skills-services" placeholder="Describe your skills and services" rows="4" required></textarea>
+
+                <label for="years-of-experience">Years of Experience (*):</label>
+                <input type="number" id="years-of-experience" min="0" required>
+
+                <label for="certification-number">Certification Number:</label>
+                <input type="text" id="certification-number">
+
+                <label for="availability">Availability (*):</label>
+                <select id="availability" required>
+                    <option value="" disabled selected>Select availability</option>
+                    <option value="Full-Time">Full-Time</option>
+                    <option value="Part-Time">Part-Time</option>
+                </select>
+
+                <label for="workshop-address">Workshop Address:</label>
+                <input type="text" id="workshop-address">
+
+                <label for="county">County (*):</label>
+                <select id="county" required>
+                    <option value="" disabled selected>Select your county</option>
+                    <!-- Counties will be populated here -->
+                </select>
+
+                <label for="sub-county">Sub-County (Please select County first!):</label>
+                <select id="sub-county" required>
+                    <option value="" disabled selected>Select your sub-county</option>
+                    <!-- Sub-counties will be populated based on selected county -->
+                </select>
+            </div>
+
+            <div class="vehicle-expertise-container">
+                <h2 class="h2-login-section">Vehicle Expertise</h2>
+                <label for="vehicle-types">Vehicle Types (*):</label>
+                <select id="vehicle-types" required>
+                    <option value="" disabled selected>Select vehicle types</option>
+                    <option value="Sedans">Sedans</option>
+                    <option value="SUVs">SUVs</option>
+                    <option value="Trucks">Trucks</option>
+                    <option value="Motorcycles">Motorcycles</option>
+                </select>
+
+                <label for="preferred-brands">Preferred Brands (*):</label>
+                <select id="preferred-brands" required>
+                    <option value="" disabled selected>Select preferred brands</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="Ford">Ford</option>
+                    <option value="Honda">Honda</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Mercedes">Mercedes</option>
+                    <option value="Nissan">Nissan</option>
+                </select>
+            </div>
+
+            <div class="pricing-payment-container">
+                <h2 class="h2-login-section">Pricing & Payment</h2>
+                <label for="estimated-charges">Estimated Charges (*):</label>
+                <textarea id="estimated-charges" placeholder="Describe your pricing structure" rows="4" required></textarea>
+
+                <label for="payment-methods">Payment Methods (*):</label>
+                <select id="payment-methods" required>
+                    <option value="" disabled selected>Select payment method</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Mobile Payment">Mobile Payment</option>
+                    <option value="Card">Card</option>
+                </select>
+            </div>
+
+            <div class="documents-container">
+                <h2 class="h2-login-section">Supporting Documents</h2>
+                <label for="certification-license">Certification/License:</label>
+                <input type="file" id="certification-license" accept=".pdf,.jpg,.jpeg,.png">
+
+                <label for="insurance">Insurance:</label>
+                <input type="file" id="insurance" accept=".pdf,.jpg,.jpeg,.png">
+
+                <label for="identification-document">Identification Document (*):</label>
+                <input type="file" id="identification_document" accept=".pdf,.jpg,.jpeg,.png" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Profile</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Retrieve the token from local storage or session storage
+            const token = localStorage.getItem('token');
+            const userId = localStorage.getItem('user_id');
+    
+            // Check if the user is logged in
+            if (!token || !userId) {
+                alert('You are not logged in. Please log in to continue.');
+                window.location.href = 'login.html';
+                return;
+            }
+    
+            // Notify mechanic to enable location services
+            alert('Please ensure your location services are turned ON for accurate positioning.');
+
+            // Automatically capture the user's location
+            navigator.geolocation.getCurrentPosition((position) => {
+                document.getElementById('latitude').value = position.coords.latitude;
+                document.getElementById('longitude').value = position.coords.longitude;
+            }, (error) => {
+                console.error('Error getting location:', error);
+                alert('Unable to retrieve your location. Please enter it manually.');
+            });
+    
+            loadCounties();
+            document.getElementById("county").addEventListener("change", loadSubCounties);
+            fetchMechanicProfile(userId);
+    
+            async function fetchMechanicProfile(userId) {
+                try {
+                    const profileResponse = await fetch(`http://localhost:5501/api/mechanic/getMechanicProfile/${userId}`, {
+                            method: 'GET',
+                            headers: { 'Authorization': `Bearer ${token}` }
+                        })
+
+                    if (profileResponse.ok) {
+                        const profileData = await profileResponse.json();
+                        document.getElementById('full-name').value = profileData.full_name;
+                        document.getElementById('gender').value = profileData.gender;
+                        document.getElementById('national-id-passport').value = profileData.national_id_passport;
+                        document.getElementById('specialization').value = profileData.specialization;
+                        document.getElementById('skills-services').value = profileData.skills_services;
+                        document.getElementById('years-of-experience').value = profileData.years_of_experience;
+                        document.getElementById('certification-number').value = profileData.certification_number;
+                        document.getElementById('availability').value = profileData.availability;
+                        document.getElementById('workshop-address').value = profileData.workshop_address;
+                        document.getElementById('county').value = profileData.county;
+                        document.getElementById('sub-county').value = profileData.sub_county;
+                        document.getElementById('vehicle-types').value = profileData.vehicle_types;
+                        document.getElementById('preferred-brands').value = profileData.preferred_brands;
+                        document.getElementById('estimated-charges').value = profileData.estimated_charges;
+                        document.getElementById('payment-methods').value = profileData.payment_methods;
+                        if (profileData.profile_picture) {
+                            document.getElementById('profile-picture-preview').src = profileData.profile_picture;
+                        }
+                    }
+                } catch (error) {
+                    console.error("Error fetching mechanic profile:", error);
+                }
+            }
+    
+            async function loadCounties() {
+                try {
+                    const response = await fetch("counties.json");
+                    const counties = await response.json();
+                    const countySelect = document.getElementById("county");
+                    counties.forEach((county) => {
+                        const option = document.createElement("option");
+                        option.value = county.name;
+                        option.textContent = county.name;
+                        countySelect.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error("Error loading counties:", error);
+                }
+            }
+    
+            async function loadSubCounties() {
+                const countySelect = document.getElementById("county");
+                const subCountySelect = document.getElementById("sub-county");
+                const selectedCounty = countySelect.value;
+                subCountySelect.innerHTML = '<option value="" disabled selected>Select your sub-county</option>';
+                try {
+                    const response = await fetch("counties.json");
+                    const counties = await response.json();
+                    const countyData = counties.find((county) => county.name === selectedCounty);
+                    if (countyData) {
+                        countyData.sub_counties.forEach((subCounty) => {
+                            const option = document.createElement("option");
+                            option.value = subCounty;
+                            option.textContent = subCounty;
+                            subCountySelect.appendChild(option);
+                        });
+                    }
+                } catch (error) {
+                    console.error("Error loading sub-counties:", error);
+                }
+            }
+    
+            document.getElementById('profile-picture').addEventListener('change', function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        document.getElementById('profile-picture-preview').src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    
+        // Handle form submission
+        document.getElementById("mechanic-profile-form").addEventListener("submit", async function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const token = localStorage.getItem('token');
+
+        // Gather form data
+        const formData = {
+            full_name: document.getElementById("full-name").value,
+            gender: document.getElementById("gender").value,
+            national_id_passport: document.getElementById("national-id-passport").value,
+            specialization: document.getElementById("specialization").value,
+            skills_services: document.getElementById("skills-services").value,
+            years_of_experience: document.getElementById("years-of-experience").value,
+            certification_number: document.getElementById("certification-number").value,
+            availability: document.getElementById("availability").value,
+            workshop_address: document.getElementById("workshop-address").value,
+            county: document.getElementById("county").value,
+            sub_county: document.getElementById("sub-county").value,
+            latitude: document.getElementById("latitude").value,
+            longitude: document.getElementById("longitude").value,
+            vehicle_types: document.getElementById("vehicle-types").value,
+            preferred_brands: document.getElementById("preferred-brands").value,
+            estimated_charges: document.getElementById("estimated-charges").value,
+            payment_methods: document.getElementById("payment-methods").value,
+        };
+
+        try {
+            const response = await fetch("http://localhost:5501/api/mechanics/submit-profile", { 
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`, // Include authentication token if required
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                alert("Profile saved successfully!");
+                // Optionally redirect or reset the form
+                window.location.href = "mechanic-dashboard.html"; 
+            } else {
+                alert(`Error: ${result.message}`);
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            alert("An error occurred while saving the profile. Please try again.");
+        }
+    });
+    </script>
+    
+</body>
+</html>

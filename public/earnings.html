@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earnings | Mechanic Dashboard</title>
+    <link rel="stylesheet" href="stylesheets/mech-dash-style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+</head>
+<body class="mechanic-dashboard">
+    <header class="header-mech-dash">
+        <nav class="nav-bar-mech-dash">
+            <ul class="nav-links">
+                <li><a href="mechanic-dashboard.html" class="nav-item"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="bookings.html" class="nav-item"><i class="fas fa-tools"></i> Bookings Management</a></li>
+                <li><a href="earnings.html" class="nav-item"><i class="fas fa-wallet"></i> Payments</a></li>
+                <li><a href="mechanic-profile.html" class="nav-item"><i class="fas fa-user"></i> Profile Settings</a></li>
+                <li><a href="#" class="nav-item logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <aside class="sidebar-dark-theme">
+            <div class="logo-mech-dash">Mechanic Dashboard</div>
+            <ul class="sidebar-menu">
+                <li><a href="mechanic-dashboard.html" class="sidebar-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="bookings.html" class="sidebar-item"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+                <li><a href="earnings.html" class="sidebar-item active"><i class="fas fa-money-bill"></i> Earnings</a></li>
+                <li><a href="mechanic-profile.html" class="sidebar-item"><i class="fas fa-cog"></i> Profile</a></li>
+                <li><a href="#" class="sidebar-item logout-btn"><i class="fas fa-power-off"></i> Logout</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <nav class="top-navbar">
+                <div class="user-info">
+                    <img src="default-profile.png" alt="Profile Picture" class="profile-picture">
+                    <span class="username">Mechanic Name</span>
+                    <div class="dropdown">
+                        <button class="dropbtn">Profile</button>
+                        <div class="dropdown-content">
+                            <a href="mechanic-profile.html" class="dropdown-item">Settings</a>
+                            <a href="#" class="dropdown-item logout-btn">Logout</a>
+                        </div>
+                    </div>
+                    <div class="notifications">
+                        <span class="notification-icon">🔔</span>
+                        <span class="notification-badge">3</span>
+                        <div class="notifications-dropdown" id="notifications-dropdown" style="display: none;">
+                            <ul class="notification-list">
+                                <li class="notification-item">Loading notifications...</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="quick-action">Go Online</button>
+                </div>
+            </nav>
+
+            <section id="earnings" class="earnings-section">
+                <h2 class="section-title">Earnings Overview</h2>
+                <div class="earnings-stats">
+                    <div class="stat-card">Total Earnings: <span>$0.00</span></div>
+                    <div class="stat-card">Pending Payments: <span>$0.00</span></div>
+                    <div class="stat-card">Completed Jobs: <span>0</span></div>
+                </div>
+                <h3 class="sub-title">Earnings History</h3>
+                <table class="earnings-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Job Description</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="4" class="text-center">Loading earnings history...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <script src="javascripts/mech-dash-script.js"></script>
+</body>
+</html>
+

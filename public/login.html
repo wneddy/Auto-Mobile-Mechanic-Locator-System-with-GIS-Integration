@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Login</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">Auto-Mobile Mechanic Locator System</div>
+
+            <li class="dropdown">
+                <img src="default-profile.png" alt="Profile" class="profile-icon" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown-content" id="profileOptions">
+                    <a href="create-profile.html">Create Profile</a>
+                    <a href="profile-vehicle-owner.html">View Profile</a>
+                    <a href="update-profile.html">Update Profile</a>
+                    <a href="#" id="delete-profile">Delete Profile</a>
+                    <a href="#" id="logout">Logout</a>
+                </div>
+            </li>
+        </nav>
+    </header>
+
+    <section class="login-section">
+        <h2 class="h2-login-section">Sign In</h2>
+        <p class="p-login-section">Welcome back! Please sign in to your account.</p>
+
+        <!-- Message container for activation success -->
+        <div id="message" style="display: none; color: green; margin-bottom: 20px;"></div>
+
+        <form id="login-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="password">Password:</label>
+            <div class="password-container">
+                <input type="password" id="password" required>
+                <i id="togglePassword" class="fa fa-eye" style="cursor: pointer;"></i>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Sign In</button>
+        </form>
+
+        <p class="p-login-section">Don't have an account? <a href="registration.html">Sign Up</a></p>
+        <p class="p-login-section"><a href="forgot-password.html">Forgot Password?</a></p> <!-- Added link for forgot password -->
+    </section>
+
+    <script>
+        // Function to display the message if it exists in the URL
+        function displayMessage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const message = urlParams.get('message');
+            if (message) {
+                const messageContainer = document.getElementById('message');
+                messageContainer.textContent = message;
+                messageContainer.style.display = 'block'; // Show the message
+            }
+        }
+    
+        // Call the function when the page loads
+        window.onload = displayMessage;
+    
+        // Toggle password visibility
+        document.getElementById("togglePassword").addEventListener("click", function () {
+            const passwordField = document.getElementById("password");
+            this.classList.toggle("fa-eye-slash"); 
+            passwordField.type = passwordField.type === "password" ? "text" : "password";
+        });
+    
+        // Add event listener for the login form submission
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent default form submission
+    
+            // Gather form data
+            const formData = {
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            };
+    
+            try {
+                // Send POST request to the backend for login
+                const response = await fetch('http://localhost:5501/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+    
+                // Handle the response
+                const result = await response.json();
+                if (response.ok) {
+                    // Store the JWT token and user ID in localStorage
+                    localStorage.setItem('token', result.token); // Store the JWT token
+                    localStorage.setItem('user_id', result.user_id); // Store the user ID
+                    console.log('Stored token:', localStorage.getItem('token'));
+                    alert('Login successful!'); // Show success message
+    
+                    // Fetch vehicle owner profile ID if the user is a vehicle owner
+                    await fetchVehicleOwnerProfile(result.user_id);
+    
+                    // Redirect user
+                    window.location.href = new URL(result.redirect, window.location.origin).href;
+    
+                } else {
+                    // Display error message
+                    const messageContainer = document.getElementById('message');
+                    messageContainer.textContent = result.message;
+                    messageContainer.style.display = 'block'; // Show message
+    
+                    // Remove any existing resend link before adding a new one
+                    const existingResendLink = document.querySelector('.resend-link');
+                    if (existingResendLink) {
+                        existingResendLink.remove();
+                    }
+    
+                    // Check if the account is not activated and provide a resend link
+                    if (result.resendLink) {
+                        const resendLink = document.createElement('a');
+                        resendLink.href = '#'; // Prevent default link behavior
+                        resendLink.textContent = 'Resend Activation Link';
+                        resendLink.className = 'resend-link'; // Add a class for styling
+    
+                        // Set up the click event for the resend link
+                        resendLink.onclick = async (event) => {
+                            event.preventDefault(); // Prevent default link behavior
+                            await resendActivationLink(formData.email);
+                        };
+    
+                        // Append the resend link to the message container
+                        messageContainer.appendChild(resendLink);
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while logging in. Please try again.');
+            }
+        });
+    
+        // Function to fetch vehicle owner profile ID
+        async function fetchVehicleOwnerProfile(userId) {
+            try {
+                const profileResponse = await fetch(`http://localhost:5501/api/auth/getVehicleOwnerProfile/${userId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}` // Include the token in the request headers
+                    }
+                });
+                if (profileResponse.ok) {
+                    const profileData = await profileResponse.json();
+                    if (profileData.id) { // Assuming the profile has an 'id' field
+                        localStorage.setItem('vehicle_owner_profile_id', profileData.id);
+                    }
+                } else {
+                    console.error('Error fetching profile:', await profileResponse.json());
+                }
+            } catch (error) {
+                console.error("Error fetching vehicle owner profile:", error);
+            }
+        }
+    
+        // Function to resend the activation link
+        async function resendActivationLink(email) {
+            try {
+                const response = await fetch('http://localhost:5501/api/auth/resend-activation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email })
+                });
+    
+                const result = await response.json();
+                if (response.ok) {
+                    alert('Activation link resent! Please check your email.'); // Show success message
+                } else {
+                    alert(`Error: ${result.message}`); // Show error message
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while resending the activation link. Please try again.');
+            }
+        }
+    </script>    
+</body>
+</html>

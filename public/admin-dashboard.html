@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Auto-Mobile Mechanic Locator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="stylesheets/admin-dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
+        <div class="sidebar-sticky">
+          <div class="sidebar-header">
+            <h3>Admin Dashboard</h3>
+          </div>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="admin-dashboard.html">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="admin-spare-parts.html">
+                <i class="fas fa-cogs"></i> Spare Parts
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="admin-users.html">
+                <i class="fas fa-users"></i> Users
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="admin-mechanics.html">
+                <i class="fas fa-wrench"></i> Mechanics
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="admin-bookings.html">
+                <i class="fas fa-calendar-check"></i> Bookings
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Main content -->
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Dashboard</h1>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+              <button type="button" class="btn btn-sm btn-outline-secondary" id="exportReportBtn">
+                <i class="fas fa-download"></i> Export Report
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" id="printReportBtn">
+                <i class="fas fa-print"></i> Print
+              </button>
+            </div>
+            <div class="dropdown">
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="timeRangeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="far fa-calendar-alt"></i> This Month
+              </button>
+              <div class="dropdown-menu" aria-labelledby="timeRangeDropdown">
+                <a class="dropdown-item" href="#" data-range="day">Today</a>
+                <a class="dropdown-item" href="#" data-range="week">This Week</a>
+                <a class="dropdown-item active" href="#" data-range="month">This Month</a>
+                <a class="dropdown-item" href="#" data-range="year">This Year</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row mb-4">
+          <div class="col-md-3 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                      Total Users</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalUsers">0</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-users fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                      Total Mechanics</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalMechanics">0</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-wrench fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                      Total Bookings</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalBookings">0</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-calendar-check fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                      Spare Parts</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalParts">0</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-cogs fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="row mb-4">
+          <div class="col-md-8">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Bookings Overview</h6>
+              </div>
+              <div class="card-body">
+                <div class="chart-area">
+                  <canvas id="bookingsChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">User Distribution</h6>
+              </div>
+              <div class="card-body">
+                <div class="chart-pie">
+                  <canvas id="userDistributionChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity and Top Mechanics -->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Recent Bookings</h6>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Customer</th>
+                        <th>Mechanic</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="recentBookingsTable">
+                      <!-- Data will be loaded dynamically -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Top Mechanics</h6>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>Mechanic</th>
+                        <th>Specialization</th>
+                        <th>Bookings</th>
+                        <th>Rating</th>
+                      </tr>
+                    </thead>
+                    <tbody id="topMechanicsTable">
+                      <!-- Data will be loaded dynamically -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Alert Modal -->
+  <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="alertModalLabel">Notification</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="alertModalBody">
+          <!-- Alert message will be inserted here -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="javascripts/auth-handler.js"></script>
+  <script src="javascripts/admin-dashboard.js"></script>
+</body>
+</html>
+

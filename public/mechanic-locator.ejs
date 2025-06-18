@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mechanic Locator</title>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">Auto-Mobile Mechanic Locator System</div>
+            <ul>
+                <li><a href="find-service.html">Find Services</a></li>
+                <li><a href="find-mechanic.html">Find Mechanic</a></li>
+                <li class="dropdown">
+                    <button>About</button>
+                    <div class="dropdown-content">
+                            <a href="about.html">About</a>
+                            <a href="faq.html">FAQ</a>
+                            <a href="contact.html">Contact</a>
+                    </div>
+                </li>   
+            </ul>
+            <li class="dropdown">
+                <img src="default-profile.png" alt="Profile" class="profile-icon" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown-content" id="profileOptions">
+                    <a href="create-profile.html">Create Profile</a>
+                    <a href="profile-vehicle-owner.html">View Profile</a>
+                    <a href="update-profile.html">Update Profile</a>
+                    <a href="#" id="delete-profile">Delete Profile</a>
+                    <a href="#" id="logout">Logout</a>
+                </div>
+            </li>
+        </nav>
+    </header>
+
+    <div id="loading-indicator">Loading...</div>
+    <div id="map" style="height: 500px"></div>
+    <div id="location-container">
+    <!-- Mechanic Pop-up -->
+    <div id="mechanic-popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span> 
+            <h2 id="mechanic-name"></h2>
+            <p><strong>Specialization:</strong> <span id="mechanic-specialization"></span></p>
+            <p><strong>Distance:</strong> <span id="mechanic-distance"></span></p>
+            <p><strong>Availability:</strong> <span id="mechanic-availability"></span></p>
+            <p><strong>Estimated Service Charge:</strong> <span id="mechanic-price"></span></p>
+
+            <label for="popup-problem-description">Describe Your Issue:</label>
+            <textarea id="popup-problem-description" rows="4" placeholder="Explain your car issue..."></textarea>
+
+            <button id="request-service">Request Assistance</button>
+            <button id="close-popup">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster-src.js"></script>
+    <!-- Add auth-utils.js before script.js -->
+    <script src="/javascripts/auth-utils.js"></script>
+    <script src="/javascripts/script.js"></script>
+</body>
+</html>

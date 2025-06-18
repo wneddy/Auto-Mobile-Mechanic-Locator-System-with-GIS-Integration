@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>FAQ - Auto-Mobile Mechanic Locator System</title>
+</head>
+<body class="body-about-section">
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">Auto-Mobile Mechanic Locator System</div>
+            <ul>
+                <li><a href="find-service.html">Find Services</a></li>
+                <!--<li><a href="marketplace.html">Market Place</a></li>-->
+                <li><a href="http://localhost:5501/mechanic-locator">Find Mechanic</a></li>
+                <li class="dropdown">
+                    <button>About</button>
+                    <div class="dropdown-content">
+                        <a href="about.html">About</a>
+                        <a href="faq.html">FAQ</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="notification-area">
+                <button class="notification-button" id="notification-button">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span> <!-- Example badge for notifications -->
+                </button>
+                <div class="pending-requests-dropdown" id="pending-requests-dropdown">
+                    <ul class="pending-requests" id="notification-list">
+                        <!-- Notifications will be dynamically added here -->
+                    </ul>
+                </div>
+            </div>
+            <li class="dropdown">
+                <img src="default-profile.png" alt="Profile" class="profile-icon" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown-content" id="profileOptions">
+                    <a href="create-profile.html">Create Profile</a>
+                    <a href="profile-vehicle-owner.html">View Profile</a>
+                    <a href="update-profile.html">Update Profile</a>
+                    <a href="reports.html">Service History</a>
+                    <a href="#" id="delete-profile">Delete Profile</a>
+                    <a href="#" id="logout">Logout</a>
+                </div>
+            </li>
+        </nav>
+    </header>
+    <section class="faq-page">
+        <h2 class="h2-faq-page">Frequently <span class="highlight">Asked</span> Questions</h2>
+        
+        <div class="faq-container-page">
+            <div class="faq-item">
+                <button class="faq-question">How Do I Use the Auto-Mobile Mechanic Locator System to Find a Mechanic? <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p class="p-faq">Finding a mechanic is simple! Just enter your location and vehicle type, and our platform will match you with the nearest available mechanics, ensuring you receive the best service tailored to your needs.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Can I Track My Service Appointment in Real-Time? <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p class="p-faq">Yes, our platform offers real-time tracking of your booked service appointments, giving you peace of mind as you can monitor progress anytime.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">How Do I Book a Mechanic Using the Platform? <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p class="p-faq">Simply select your preferred mechanic, choose an available time slot, and complete the booking process. Our user-friendly interface makes this quick and hassle-free.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">What Features Are Available in the Spare Parts Marketplace? <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p class="p-faq">Our Spare Parts Marketplace offers a wide array of high-quality parts that are easily searchable. You can compare prices, read reviews, and order parts with just a few clicks.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">How Can I Use the Integrated Map Feature? <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p class="p-faq">The integrated map allows you to quickly identify top-rated mechanics nearby. Just enter your location, and we'll show you a list of mechanics who can assist.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">What Should I Do in Case of an Issue with My Service? <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p class="p-faq">If you encounter any issues, please reach out to our customer support team via the Contact Us section, and we will assist you promptly to resolve the matter.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="script.js"></script>
+
+    <section class="mechanic-section">
+        <h2 class="h2-mechanic-section-about-section">Connect with Expert Mechanics</h2>
+        <div class="image-container-mechanic-section">
+            <div class="image-slider-mechanic-section">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/66600c81-50d2-4ead-e35f-66c3be444b00/public" alt="Mechanic using tablet">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/c480e728-b1c4-4311-b662-a896537eec00/public" alt="Car diagnostics on phone">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/a02d849e-bb5d-47c7-7863-a811f186a800/publicContain" alt="Mechanic working under car">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/c4f3f115-00c6-44b8-7d9f-732f66b4b100/public" alt="Follow us for updates">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/dbc8d1f0-ded8-46e7-02bd-cdd648f5ad00/public" alt="Car repair expert">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/b9438390-0e28-480a-1ec3-d5bb10bf0800/public" alt="Engine repair">
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>Auto-Mobile Mechanic Locator System</h2>
+                <p>
+                    We are building a web-based platform that connects vehicle owners with nearby mechanics
+                    based on location, availability, and vehicle type. Our system ensures quick and reliable
+                    service by providing real-time tracking, booking options, and a marketplace for spare parts.
+                </p>
+                <div class="contact-info">
+                    <p>📞 +1 23 456 789</p>
+                    <p>✉️ support@automobilelocator.com</p>
+                    <p>📍 123 Mechanic Ave, City, State, USA</p>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="find-mechanic.html">Find a Mechanic</a></li>
+                    <li><a href="marketplace.html">Spare Parts Marketplace</a></li>
+                    <li><a href="#">Booking</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-resources">
+                <h3>Additional Resources</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">User Account</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Email</a>
+                    <a href="#">YouTube</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 AUTO-MOBILE MECHANIC LOCATOR SYSTEM. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>

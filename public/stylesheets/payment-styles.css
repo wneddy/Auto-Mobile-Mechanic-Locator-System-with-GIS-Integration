@@ -1,0 +1,230 @@
+/* Payment Modal Styles */
+.payment-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .payment-modal-content {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 550px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .payment-modal h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+  
+  .payment-modal h3 {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    color: #444;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+  }
+  
+  .close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s;
+  }
+  
+  .close-modal:hover {
+    color: #333;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+  }
+  
+  .form-group input[type="number"],
+  .form-group input[type="tel"],
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .form-group textarea {
+    height: 100px;
+    resize: vertical;
+  }
+  
+  .payment-section,
+  .rating-section,
+  .service-details {
+    margin-bottom: 25px;
+  }
+  
+  .service-details {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 6px;
+  }
+  
+  .service-details p {
+    margin: 8px 0;
+  }
+  
+  .rating-stars {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+    font-size: 30px;
+  }
+  
+  .star {
+    color: #ccc;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: color 0.2s;
+  }
+  
+  .star:hover,
+  .star.selected {
+    color: #ffc107;
+  }
+  
+  .mechanic-phone {
+    background-color: #e8f4ff;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    border-left: 3px solid #007bff;
+  }
+  
+  #submit-payment {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  
+  #submit-payment:hover {
+    background-color: #0069d9;
+  }
+  
+  /* Notification item with pay button */
+  .notification-item .btn-pay-service {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-top: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  
+  .notification-item .btn-pay-service:hover {
+    background-color: #218838;
+  }
+  
+  /* Service requests table pay button */
+  .service-requests-table .btn-pay {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  
+  .service-requests-table .btn-pay:hover {
+    background-color: #218838;
+  }
+  
+  .payment-status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  .payment-status.paid {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  /* Payment button styles */
+  .payment-button-area {
+    margin-right: 15px;
+  }
+  
+  .payment-button {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .payment-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .payment-button i {
+    color: #000000;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 576px) {
+    .payment-modal-content {
+      width: 95%;
+      padding: 15px;
+    }
+  
+    .rating-stars {
+      font-size: 24px;
+    }
+  }
+  
+  

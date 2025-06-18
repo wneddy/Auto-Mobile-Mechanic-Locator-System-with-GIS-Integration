@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Marketplace</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">Auto-Mobile Mechanic Locator System</div>
+            <ul>
+                <li><a href="find-service.html">Find Services</a></li>
+                <li><a href="marketplace.html">Market Place</a></li>
+                <li><a href="http://localhost:5501/mechanic-locator">Find Mechanic</a></li>
+                <li class="dropdown">
+                    <button>About</button>
+                    <div class="dropdown-content">
+                        <a href="about.html">About</a>
+                        <a href="faq.html">FAQ</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="notification-area">
+                <button class="notification-button" id="notification-button">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="notification-count">0</span> <!-- Badge for notifications -->
+                </button>
+                <div class="pending-requests-dropdown" id="pending-requests-dropdown">
+                    <ul class="pending-requests" id="notification-list">
+                        <!-- Notifications will be populated here -->
+                    </ul>
+                </div>
+            </div>
+            <div class="cart-icon-container">
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+            </div>
+            <li class="dropdown">
+                <img src="default-profile.png" alt="Profile" class="profile-icon" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown-content" id="profileOptions">
+                    <a href="create-profile.html">Create Profile</a>
+                    <a href="profile-vehicle-owner.html">View Profile</a>
+                    <a href="update-profile.html">Update Profile</a>
+                    <a href="reports.html">Service History</a>
+                    <a href="#" id="delete-profile">Delete Profile</a>
+                    <a href="#" id="logout">Logout</a>
+                </div>
+            </li>
+        </nav>
+    </header>
+
+    <section class="marketplace-hero">
+        <div class="hero-text-mp">
+            <h3 class="h3-hero-text-mp">Welcome to the Spare Parts Marketplace</h1>
+            <p class="p-hero-text-mp">Find the best spare parts for your vehicle, uploaded by trusted vendors.</p>
+        </div>
+    </section>
+
+    <section class="search-section">
+        <div class="container">
+            <input type="text" id="search" placeholder="Search for spare parts..." class="form-control">
+            <select id="category" class="form-control">
+                <option value="">Select Category</option>
+                <option value="engine">Engine Parts</option>
+                <option value="brakes">Brakes</option>
+                <option value="suspension">Suspension</option>
+                <option value="electrical">Electrical</option>
+                <option value="body">Body Parts</option>
+            </select>
+            <button class="btn btn-primary mt-2" onclick="searchParts()">Search</button>
+        </div>
+    </section>
+
+    <section class="parts-list">
+        <div class="container-mp">
+            <h2 class="h2-container-mp">Available Spare Parts</h2>
+            <div class="row" id="parts-container">
+                <!-- Spare parts will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+    <section class="mechanic-section">
+        <h2 class="h2-mechanic-section">Connect with Expert Mechanics</h2>
+        <div class="image-container-mechanic-section">
+            <div class="image-slider-mechanic-section">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/66600c81-50d2-4ead-e35f-66c3be444b00/public" alt="Mechanic using tablet">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/c480e728-b1c4-4311-b662-a896537eec00/public" alt="Car diagnostics on phone">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/a02d849e-bb5d-47c7-7863-a811f186a800/publicContain" alt="Mechanic working under car">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/c4f3f115-00c6-44b8-7d9f-732f66b4b100/public" alt="Follow us for updates">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/dbc8d1f0-ded8-46e7-02bd-cdd648f5ad00/public" alt="Car repair expert">
+                <img src="https://imagedelivery.net/xaKlCos5cTg_1RWzIu_h-A/b9438390-0e28-480a-1ec3-d5bb10bf0800/public" alt="Engine repair">
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>Auto-Mobile Mechanic Locator System</h2>
+                <p>
+                    We are building a web-based platform that connects vehicle owners with nearby mechanics
+                    based on location, availability, and vehicle type. Our system ensures quick and reliable
+                    service by providing real-time tracking, booking options, and a marketplace for spare parts.
+                </p>
+                <div class="contact-info">
+                    <p>📞 +1 23 456 789</p>
+                    <p>✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="265553565649545266475352494b49444f4a434a4945475249540845494b">[email&#160;protected]</a></p>
+                    <p>📍 123 Mechanic Ave, City, State, USA</p>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="find-mechanic.html">Find a Mechanic</a></li>
+                    <li><a href="marketplace.html">Spare Parts Marketplace</a></li>
+                    <li><a href="find-mechanic.html">Real-Time Tracking</a></li>
+                    <li><a href="booking.html">Booking</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact-us.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-resources">
+                <h3>Additional Resources</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">User Account</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Email</a>
+                    <a href="#">YouTube</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 AUTO-MOBILE MECHANIC LOCATOR SYSTEM. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <!--<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+     Add the marketplace.js script -->
+    <script src="javascripts/marketplace.js"></script>
+</body>
+</html>
+
