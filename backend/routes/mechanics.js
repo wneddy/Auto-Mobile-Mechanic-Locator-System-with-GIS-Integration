@@ -1,14 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const validateToken = require('../middleware/validateToken');
-//const Notification = require('../models/Notification');
-//const MechanicProfiles = require('../models/MechanicProfiles'); // Ensure this path is correct
-//const ServiceRequest = require('../models/ServiceRequest');
-//const MechEarnings = require('../models/MechEarnings');
-//const Booking = require('../models/Booking');
 const { User, Booking, Notification, ServiceRequest, MechEarnings, MechanicProfiles, VehicleOwnerProfiles } = require('../models');
-//const { sequelize } = require('../../src/config/db'); // Adjust the path as necessary
-const sequelize = require('../../src/config/db'); // Adjust the path as necessary
+const sequelize = require('../../src/config/db');
 const { Op } = require('sequelize');
 const { body, validationResult } = require('express-validator');
 const multer = require('multer');
@@ -30,11 +24,7 @@ router.post("/profile", validateToken, createProfile); // Create a new profile
 router.get("/profile", validateToken, getProfile); // Get the logged-in mechanic's profile
 router.put("/profile", validateToken, updateProfile); // Update the logged-in mechanic's profile
 router.delete("/profile", validateToken, deleteProfile); // Delete the logged-in mechanic's profile
-/*
-// Admin routes
-router.get("/profiles", validateToken, getAllMechanicProfiles); // Admin can view all profiles
-router.delete("/profiles/:userId", validateToken, adminDeleteMechanicProfile); // Admin can delete any mechanic's profile
-*/
+
 // Route to fetch mechanic profile by user ID
 router.get('/getMechanicProfile/:userId', async (req, res) => {
     const userId = req.params.userId;
@@ -165,7 +155,6 @@ router.get('/dashboard', validateToken, async (req, res) => {
     }
 });
 
-// GET pending service requests for a mechanic
 // Route to get pending service requests
 router.get('/pending-requests', validateToken, async (req, res) => {
     try {
@@ -204,7 +193,7 @@ router.get('/pending-requests', validateToken, async (req, res) => {
 // Route to accept a service request
 router.post('/accept-request', validateToken, async (req, res) => {
     try {
-        const { requestId } = req.body; // Get requestId from the request body
+        const { requestId } = req.body; 
 
         if (!requestId) {
             return res.status(400).json({ message: 'Request ID is required' });
@@ -224,7 +213,7 @@ router.post('/accept-request', validateToken, async (req, res) => {
             return res.status(404).json({ message: 'Service request not found' });
         }
 
-        const vehicleOwnerId = serviceRequest.user_id; // Use user_id to get the vehicle owner's ID
+        const vehicleOwnerId = serviceRequest.user_id; 
 
         // Debugging: Log the vehicle owner ID
         console.log('Vehicle Owner ID:', vehicleOwnerId);
@@ -312,22 +301,7 @@ router.post('/notifications', validateToken, async (req, res) => {
         res.status(500).json({ message: 'Error creating notification' });
     }
 });
-/*
-// Route to fetch notifications for a specific user
-router.get('/get-notifications', async (req, res) => {
-    try {
-        const userId = req.user.id; // Assuming you set the user ID in the request after validating the token
-        const notifications = await Notification.findAll({
-            where: { user_id: userId },
-            order: [['created_at', 'DESC']] // Optional: Order by creation date
-        });
-        res.status(200).json(notifications);
-    } catch (error) {
-        console.error('Error fetching notifications:', error);
-        res.status(500).json({ message: 'Error fetching notifications' });
-    }
-});
-*/
+
 // Route to fetch earnings
 router.get('/earnings', validateToken, async (req, res) => {
     const userId = req.userId; // Get user_id from the validated token
@@ -401,8 +375,8 @@ router.get('/bookings', async (req, res) => {
             include: [
                 {
                     model: ServiceRequest,
-                    as: 'serviceRequest', // Use the alias defined in the association
-                    attributes: ['status'] // Include the status from ServiceRequest
+                    as: 'serviceRequest', 
+                    attributes: ['status']
                 }
             ]
         });
@@ -481,7 +455,7 @@ router.post('/change-password', async (req, res) => {
         }
 
         // Check if the current password is correct
-        const isMatch = await bcrypt.compare(currentPassword, profile.password); // Assuming you have a password field
+        const isMatch = await bcrypt.compare(currentPassword, profile.password); 
 
         if (!isMatch) {
             return res.status(401).json({ success: false, message: 'Current password is incorrect' });
@@ -591,7 +565,7 @@ router.post('/user-service-request', validateToken, async (req, res) => {
         const serviceRequest = await ServiceRequest.create({
             user_id: userId,
             mechanic_id: mechanicId,
-            description: problemDescription // Assuming you have a description field
+            description: problemDescription 
         });
 
         res.status(201).json({ message: 'Service request sent', serviceRequest });
@@ -614,7 +588,7 @@ router.get('/distance/:mechanicId', async (req, res) => {
 
         const distance = geolib.getDistance(
             { latitude: userLat, longitude: userLng },
-            { latitude: mechanic.latitude, longitude: mechanic.longitude } // Assuming these fields exist
+            { latitude: mechanic.latitude, longitude: mechanic.longitude } 
         );
 
         res.json({ distance: distance / 1000 }); // Convert to kilometers
@@ -877,41 +851,4 @@ const isAdmin = async (req, res, next) => {
   })
 
 
-
-/*
-// Function to fetch nearby mechanics
-async function getNearbyMechanics(latitude, longitude) {
-    // Example query using a hypothetical database model
-    return await MechanicProfiles.findAll({
-        location: {
-            $near: {
-                $geometry: {
-                    type: "Point",
-                    coordinates: [longitude, latitude]
-                },
-                $maxDistance: 5000 // distance in meters
-            }
-        }
-    });
-}
-
-// Define the route to fetch nearby mechanics
-router.get('/', async (req, res) => {
-    const { lat, lng } = req.query;
-
-    // Validate the input
-    if (!lat || !lng) {
-        return res.status(400).json({ error: 'Latitude and longitude are required.' });
-    }
-
-    try {
-        // Fetch nearby mechanics from the database
-        const nearbyMechanics = await getNearbyMechanics(lat, lng);
-        res.json(nearbyMechanics);
-    } catch (error) {
-        console.error('Error fetching nearby mechanics:', error);
-        res.status(500).json({ error: 'Failed to fetch nearby mechanics. Please try again later.' });
-    }
-});
-*/
-module.exports = router; // Export the router
+module.exports = router; 
