@@ -1,11 +1,11 @@
 require("dotenv").config()
 const express = require("express")
 const bodyParser = require("body-parser")
-const sequelize = require("./src/config/db") // Correctly import the sequelize instance
-const User = require("./backend/models/User") // Import the User model
+const sequelize = require("./src/config/db")
+const User = require("./backend/models/User") 
 const db = require("./backend/models/index")
-const authRoutes = require("./backend/routes/authRoutes") // Import Auth Routes
-const mechanicRoutes = require("./backend/routes/mechanics") // Adjust the path as necessary
+const authRoutes = require("./backend/routes/authRoutes") 
+const mechanicRoutes = require("./backend/routes/mechanics") 
 const adminProfilesRoutes = require("./backend/routes/admin-profiles")
 const sparePartsRoutes = require("./backend/routes/spare-parts")
 const usersRoutes = require("./backend/routes/users")
@@ -27,7 +27,6 @@ const app = express()
 // Create an HTTP server and attach Socket.IO to it
 const server = http.createServer(app)
 
-// Updated CORS configuration - don't use wildcard origin with credentials
 app.use(
   cors({
     origin: ["http://127.0.0.1:5500", "http://127.0.0.1:5501", "http://localhost:5500", "http://localhost:5501"],
@@ -50,7 +49,6 @@ app.use(express.urlencoded({ extended: true })) // Middleware to parse URL-encod
 app.use("/uploads", express.static("uploads"))
 
 app.set("view engine", "ejs")
-// Set the views directory to the public folder
 app.set("views", path.join(__dirname, "public"))
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.get("/mechanic-locator", (req, res) => {
@@ -70,7 +68,7 @@ app.use(bodyParser.json())
 
 // Routes
 app.use("/api/auth", authRoutes)
-app.use("/api/vehicle-owner", vehicleOwnerRoutes) // Use the vehicle owner routes
+app.use("/api/vehicle-owner", vehicleOwnerRoutes) 
 app.use("/api/mechanics", mechanicRoutes)
 app.use("/api/admin-profiles", adminProfilesRoutes)
 app.use("/api/spare-parts", sparePartsRoutes)
@@ -228,10 +226,10 @@ app.use((err, req, res, next) => {
 // Sync the database and start the server
 const PORT = process.env.PORT || 5501
 db.sequelize
-  .sync({ alter: true }) // Use { alter: true } to update the existing tables
+  .sync({ alter: true })
   .then(() => {
     console.log("Database synced successfully.")
-    server.listen(PORT, () => console.log(`Server running on port ${PORT}`)) // Use the HTTP server to listen
+    server.listen(PORT, () => console.log(`Server running on port ${PORT}`)) 
   })
   .catch((error) => {
     console.error("Error syncing database:", error)
