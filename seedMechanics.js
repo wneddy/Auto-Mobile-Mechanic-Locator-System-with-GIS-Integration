@@ -1,10 +1,9 @@
-const sequelize = require('./src/config/db'); // Path to your database configuration
-const MechanicProfiles = require('./backend/models/MechanicProfiles'); // Path to your MechanicProfiles model
+const sequelize = require('./src/config/db'); 
+const MechanicProfiles = require('./backend/models/MechanicProfiles'); 
 
 const seedMechanics = async () => {
     try {
-        // Sync the database (create table if it doesn't exist)
-        await sequelize.sync({ force: true }); // Use { force: true } only for development to drop existing tables
+        await sequelize.sync({ force: true }); 
 
         // Create dummy data
         const mechanics = [
@@ -46,7 +45,7 @@ const seedMechanics = async () => {
                 estimated_charges: JSON.stringify({ "brake_repair": 150 }),
                 payment_methods: "Mobile Payment",
             },
-            // Add more dummy mechanics as needed
+            
         ];
 
         // Insert dummy data into the database
@@ -60,5 +59,4 @@ const seedMechanics = async () => {
     }
 };
 
-// Run the seed function
 seedMechanics();
