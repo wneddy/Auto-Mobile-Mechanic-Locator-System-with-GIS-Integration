@@ -1,6 +1,6 @@
-// Global variables// Global variables
+// Global variables
 if (typeof API_URL === 'undefined') {
-    const API_URL = "http://localhost:5501/api"; // Base URL for API requests (empty for same domain)
+    const API_URL = "http://localhost:5501/api"; 
 }
 let currentPage = 1
 let totalPages = 1
