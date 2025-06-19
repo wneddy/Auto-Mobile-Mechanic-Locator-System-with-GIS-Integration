@@ -1,8 +1,6 @@
 // reporting.js
 function logError(error) {
     console.error("An error occurred:", error);
-    // Optionally, send the error to a logging service
-    // saveToLoggingService(error);
 }
 
 // Global error handler for uncaught errors
@@ -47,12 +45,9 @@ function getContextHTML(event) {
     if (!target || !(target instanceof HTMLElement)) {
         throw new Error("Invalid target element");
     }
-
-    // Use a try-catch block only around the code that may throw an error
     try {
         // Check if target has a parent before accessing parent properties
         if (target.parentElement) {
-            // Example of accessing innerHTML safely
             let contextHTML = target.innerHTML;
             console.log("Context HTML:", contextHTML);
         } else {
@@ -68,7 +63,7 @@ function getContextHTML(event) {
     }
 
     // Example of a loop that might need correction
-    let elements = document.querySelectorAll('.some-class'); // Adjust selector as needed
+    let elements = document.querySelectorAll('.some-class'); 
     for (let i = 0; i < elements.length; i++) {
         // Ensure that the element exists before accessing it
         if (elements[i]) {
