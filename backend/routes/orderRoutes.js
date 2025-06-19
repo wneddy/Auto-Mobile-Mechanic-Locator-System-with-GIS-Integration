@@ -116,29 +116,7 @@ async function processMpesaPayment(phoneNumber, amount, orderId) {
       transactionId: "MPE" + Math.floor(Math.random() * 1000000),
     }
 
-    // For actual implementation, you would use the M-Pesa API
-    // const mpesaResponse = await axios.post('https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest', {
-    //     BusinessShortCode: process.env.MPESA_SHORTCODE,
-    //     Password: generatePassword(),
-    //     Timestamp: getTimestamp(),
-    //     TransactionType: 'CustomerPayBillOnline',
-    //     Amount: amount,
-    //     PartyA: phoneNumber,
-    //     PartyB: process.env.MPESA_SHORTCODE,
-    //     PhoneNumber: phoneNumber,
-    //     CallBackURL: `${process.env.API_URL}/mpesa/callback`,
-    //     AccountReference: `Order ${orderId}`,
-    //     TransactionDesc: 'Payment for spare parts'
-    // }, {
-    //     headers: {
-    //         'Authorization': `Bearer ${mpesaToken}`
-    //     }
-    // });
-
-    // return {
-    //     success: true,
-    //     transactionId: mpesaResponse.data.CheckoutRequestID
-    // };
+   
   } catch (error) {
     console.error("Error processing M-Pesa payment:", error)
     return {
