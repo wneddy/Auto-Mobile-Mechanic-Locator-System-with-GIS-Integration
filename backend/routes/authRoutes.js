@@ -225,7 +225,6 @@ router.post('/login', async (req, res) => {
 });
 
 // Route to get the current token for a user
-// Get user's current token - KEEP ONLY THIS VERSION
 router.get("/users/:userId/token", validateToken, async (req, res) => {
     try {
       console.log(`Token request received for user ID: ${req.params.userId}`)
